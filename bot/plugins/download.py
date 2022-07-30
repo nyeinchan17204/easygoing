@@ -23,7 +23,7 @@ def _telegram_file(client, message):
   fname = message.text
   rname = message.caption
   print(rname)
-  if rname.find(')') != 1
+  if rname.find(')') != 1 :
     gname = find_between(rname,0,')')
   else
     gname = rname
