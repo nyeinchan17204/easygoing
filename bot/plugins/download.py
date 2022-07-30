@@ -22,11 +22,10 @@ def _telegram_file(client, message):
   user_id = message.from_user.id
   fname = message.text
   rname = message.caption
-  print(rname)
   if rname.find(')') != 1 :
     gname = find_between(rname,0,')')
   else:
-    gname = rname
+    gname = message.caption
   print(gname)
   sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**'+gname+').mp4', quote=True)
   if message.document:
