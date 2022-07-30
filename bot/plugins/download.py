@@ -8,9 +8,6 @@ from bot import DOWNLOAD_DIRECTORY, LOGGER
 from bot.config import Messages, BotCommands
 from pyrogram.errors import FloodWait, RPCError
 
-
-
-@Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
 def find_between( s, first_int, last ): #use first only int
     try:
         start = first_int #s.index( first ) + len( first )
@@ -18,6 +15,9 @@ def find_between( s, first_int, last ): #use first only int
         return s[start:end]
     except ValueError:
         return ""
+
+@Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
+
 def _telegram_file(client, message):
   user_id = message.from_user.id
   fname = message.text
