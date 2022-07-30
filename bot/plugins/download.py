@@ -21,7 +21,7 @@ def find_between( s, first_int, last ): #use first only int
 def _telegram_file(client, message):
   user_id = message.from_user.id
   fname = message.text
-  rname = message.caption
+  rname = message.caption+'(moenya)'
   print(rname)
   gname = find_between(rname,0,')')
   print(gname)
