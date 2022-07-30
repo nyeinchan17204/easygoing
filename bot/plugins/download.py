@@ -11,9 +11,9 @@ from pyrogram.errors import FloodWait, RPCError
 
 
 @Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
-def find_between( s, first, last ): #use first only int
+def find_between( s, first_int, last ): #use first only int
     try:
-        start = first #s.index( first ) + len( first )
+        start = first_int #s.index( first ) + len( first )
         end = s.index( last, start )
         return s[start:end]
     except ValueError:
@@ -22,7 +22,9 @@ def _telegram_file(client, message):
   user_id = message.from_user.id
   fname = message.text
   rname = message.caption
+  print(rname)
   gname = find_between(rname,0,')')
+  print(gname)
   sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**'+gname+').mp4', quote=True)
   if message.document:
     file = message.document
@@ -30,7 +32,7 @@ def _telegram_file(client, message):
     file = message.video
   elif message.audio:
     file = message.audio
-  sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
+  sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.gname+').mp4', humanbytes(file.file_size), file.mime_type))
   LOGGER.info(f'Download:{user_id}: {file.file_id}')
   try:
     file_path = message.download(file_name=DOWNLOAD_DIRECTORY)
