@@ -21,8 +21,9 @@ def find_between( s, first_int, last ): #use first only int
 def _telegram_file(client, message):
   user_id = message.from_user.id
   fname = message.text
-  rname = message.caption+')'
-    gname = find_between(rname,0,')')
+  rname = message.caption
+  print(rname)
+  gname = find_between(rname,0,')')
   print(gname)
   sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**'+gname+').mp4', quote=True)
   if message.document:
