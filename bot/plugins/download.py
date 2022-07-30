@@ -32,10 +32,11 @@ def _telegram_file(client, message):
     file = message.video
   elif message.audio:
     file = message.audio
-  sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.gname+').mp4', humanbytes(file.file_size), file.mime_type))
+  sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
   LOGGER.info(f'Download:{user_id}: {file.file_id}')
   try:
-    file_path = message.download(file_name=DOWNLOAD_DIRECTORY)
+    dl_name = os.path.join(f'{DOWNLOAD_DIRECTORY}/{gname}')
+    file_path = message.download(file_name=dl_name+').mp4')
     sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
     msg = GoogleDrive(user_id).upload_file(file_path, file.mime_type)
     sent_message.reply_text(msg)
